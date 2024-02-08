@@ -7,16 +7,27 @@ const myEvent = require('events');
 
 
 // Imports from other JS files 
-const { homePage, aboutPage, contactPage, blogPage, curriculaPage, musictheoryinsideoutPage } = require('./routes.js'); 
+const { homePage, aboutPage, contactPage, blogPage, curriculaPage, 
+     musictheoryinsideoutPage, cssStaticPage, imgStaticPage } = require('./routes.js'); 
 
 global.DEBUG = true; 
 
 const port = 3000; 
 
-const server = http.createServer(async (request, response) => {
+const server = http.createServer((request, response) => { // add async?? 
 
     if(DEBUG) console.log(`Request Url: ${request.url}`); 
     let path = './views/'; 
+
+    let imagesRE = /\/images\/.+/gi; 
+
+    if (imagesRE.test(request.url)) {
+        let imgPath = `.${request.url}`;
+        if (DEBUG) console.log(`Welcome to '${imgPath}'`);
+        imgStaticPage(imgPath, response);
+        return;
+    }
+
 
     switch (request.url) {
         case '/':
@@ -52,13 +63,19 @@ const server = http.createServer(async (request, response) => {
         case '/blog':
             path+= 'blog.html'; 
             if (DEBUG) console.log(`Welcome to '/blog'`); 
-            blogPage(path, resonse); 
+            blogPage(path, response); 
             break; 
         
         case '/contact':
             path+= 'contact.html'; 
             if (DEBUG) console.log(`Welcome to '/contact'`); 
             contactPage(path, response); 
+            break;
+
+        case '/stylesheet.css':
+            path += 'stylesheet.css';
+            if (DEBUG) console.log(`Welcome to '/stylesheet.css'`); 
+            cssStaticPage(path, response);
             break;
     
         default:
@@ -71,10 +88,11 @@ const server = http.createServer(async (request, response) => {
     }
 
 
+    }
 
 
 
-})
+)
 
 
 server.listen(port, () => {

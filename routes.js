@@ -24,6 +24,14 @@ function musictheoryinsideoutPage(path, response) {
     fetchHtml(path, response)
 }
 
+function cssStaticPage(path, response) {
+    staticFile(path, response, 'text/css'); 
+}
+
+function imgStaticPage(path, response) {
+    staticFile(path, response, 'text/jpg'); 
+}
+
 
 
 
@@ -40,6 +48,19 @@ function fetchHtml(page, response) {
     });
 };
 
+function staticFile (path, response, ct)  {
+    fs.readFile(path, (error, content) => {
+        if (error) {
+            console.error(`Error reading file: ${error}`);
+            response.writeHead(500, { 'Content-Type': 'text/plain' });
+            response.end('Internal Server Error');
+        } else {
+            response.writeHead(200, { 'Content-Type': ct });
+            response.end(content);
+        }
+    });
+};
+
 module.exports = {
     homePage,
     aboutPage,
@@ -47,5 +68,7 @@ module.exports = {
     blogPage,
     curriculaPage, 
     musictheoryinsideoutPage, 
+    cssStaticPage, 
+    imgStaticPage,
 }
 

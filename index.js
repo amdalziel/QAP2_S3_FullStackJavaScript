@@ -9,6 +9,7 @@ const myEvent = require('events');
 // Imports from other JS files 
 const { homePage, aboutPage, contactPage, blogPage, curriculaPage, 
      musictheoryinsideoutPage, cssStaticPage, imgStaticPage, jsStaticPage } = require('./routes.js'); 
+const { myEmitter } = require('./logEvents.js');
 
 
 global.DEBUG = true; 
@@ -90,6 +91,8 @@ const server = http.createServer((request, response) => {
         default:
             let errorMsg = `Error 404: ${request.url} not found`; 
             if (DEBUG) console.log(errorMsg); 
+
+            myEmitter.emit('error', errorMsg); 
 
             response.writeHead(404, { 'Content-Type': 'text/plain'});
             response.end(`Error 404 - requested page not found`); 

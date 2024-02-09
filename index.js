@@ -8,13 +8,16 @@ const myEvent = require('events');
 
 // Imports from other JS files 
 const { homePage, aboutPage, contactPage, blogPage, curriculaPage, 
-     musictheoryinsideoutPage, cssStaticPage, imgStaticPage } = require('./routes.js'); 
+     musictheoryinsideoutPage, cssStaticPage, imgStaticPage, jsStaticPage } = require('./routes.js'); 
+
 
 global.DEBUG = true; 
 
-const port = 3000; 
+const port = 3000;
 
-const server = http.createServer((request, response) => { // add async?? 
+
+
+const server = http.createServer((request, response) => { 
 
     if(DEBUG) console.log(`Request Url: ${request.url}`); 
     let path = './views/'; 
@@ -76,6 +79,12 @@ const server = http.createServer((request, response) => { // add async??
             path += 'stylesheet.css';
             if (DEBUG) console.log(`Welcome to '/stylesheet.css'`); 
             cssStaticPage(path, response);
+            break;
+
+        case '/banner.js':
+            path = 'banner.js';
+            if (DEBUG) console.log(`Welcome to '/stylesheet.css'`); 
+            jsStaticPage(path, response);
             break;
     
         default:

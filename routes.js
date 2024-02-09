@@ -1,27 +1,41 @@
 const fs = require('fs'); 
 
+const { myEmitter } = require('./logEvents.js');
+
 function homePage(path, response) {
     fetchHtml(path, response)
+    const homeMsg = `Route /home visited.`; 
+    myEmitter.emit('route', homeMsg);
 }
 
 function aboutPage(path, response) {
     fetchHtml(path, response)
+    const aboutMsg = `Route /about visited.`; 
+    myEmitter.emit('route', aboutMsg);
 }
 
 function contactPage(path, response) {
     fetchHtml(path, response)
+    const contactMsg = `Route /contact visited.`; 
+    myEmitter.emit('route', contactMsg);
 }
 
 function blogPage(path, response) {
     fetchHtml(path, response)
+    const blogMsg = `Route /home visited.`; 
+    myEmitter.emit('route', blogMsg);
 }
 
 function curriculaPage(path, response) {
     fetchHtml(path, response)
+    const curriculaMsg = `Route /curricula visited.`; 
+    myEmitter.emit('route', curriculaMsg);
 }
 
 function musictheoryinsideoutPage(path, response) {
     fetchHtml(path, response)
+    const theoryMsg = `Route /musictheoryinsideout visited.`; 
+    myEmitter.emit('route', theoryMsg);
 }
 
 function cssStaticPage(path, response) {

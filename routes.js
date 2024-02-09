@@ -32,6 +32,9 @@ function imgStaticPage(path, response) {
     staticFile(path, response, 'text/jpg'); 
 }
 
+function jsStaticPage(path, response) {
+    staticFile(path, response, 'text/js'); 
+}
 
 
 
@@ -70,5 +73,6 @@ module.exports = {
     musictheoryinsideoutPage, 
     cssStaticPage, 
     imgStaticPage,
+    jsStaticPage,
 }
 

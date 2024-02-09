@@ -13,14 +13,9 @@ const myEmitter = new MyEmitter();
 
 myEmitter.on('error', (url) => {
     setUpDirectories('errorLogs', url); 
-    
-
-
-
     }
-    // fs.appendFile(path.join(__dirname, 'logs', 'route.log'), '')
-); 
 
+); 
 
 
 
@@ -29,12 +24,6 @@ myEmitter.on('route', (url) => {
 
 }); 
 
-
-
-myEmitter.on('cta', (url) => {
-    setUpDirectories('ctaLogs', url); 
-
-}); // cta = call to action 
 
 
 async function setUpDirectories(directoryType, url) {
@@ -51,15 +40,16 @@ async function setUpDirectories(directoryType, url) {
 try {
     if(DEBUG) console.log(`Route Event on: ${url} at ${onDate}`); 
     if(!fs.existsSync(path.join(__dirname, 'logs'))) {
-       await fsPromises.mkdirSync(path.join(__dirname, 'logs'));
+       await fsPromises.mkdir(path.join(__dirname, 'logs'));
     }; 
     if(DEBUG) console.log(`Directory 'logs' created`); 
     if(!fs.existsSync(path.join(__dirname, 'logs', onYear))) {
-            await fsPromises.mkdirSync(path.join(__dirname, 'logs', onYear));
+            await fsPromises.mkdir(path.join(__dirname, 'logs', onYear));
             if(DEBUG) console.log(`Directory ${onYear} created`); 
         };
     if(!fs.existsSync(path.join(__dirname, 'logs', onYear, directoryType))) {
-        await fsPromises.mkdirSync(path.join(__dirname, 'logs', onYear, directoryType)); 
+        if(DEBUG) console.log(currFolder); 
+        await fsPromises.mkdir(path.join(__dirname, 'logs', onYear, directoryType)); 
         if(DEBUG) console.log (`Directory 'logs/YYYY/${directoryType}' created`); 
     }; 
 

@@ -42,7 +42,7 @@ const server = http.createServer((request, response) => {
 
         case '/home':
             path+= 'index.html'; 
-            if (DEBUG) console.log(`Welcome to '/home'`); 
+            if (DEBUG) console.log(`Welcome to '/home'`);  
             homePage(path, response);
             break;
             

@@ -11,6 +11,10 @@
     background-color: white;
   }
 
+  main {
+    min-height: 400px; 
+  }
+
 h1 {
   padding-top: .75%; 
   padding-left: 10%; 

@@ -1,7 +1,16 @@
+// Core package required: 
 const fs = require('fs'); 
+
+// Events core package imported on the 'logEvents.js' file - where event.on() code is written. 
+// It is imported to this file as the const myEmitter 
 
 const { myEmitter } = require('./logEvents.js');
 
+// A function for each route: 
+    // 6 HTML files 
+    // 1 CSS file
+    // multiple JPG images
+    // JS file to create a slideshow of images on index.html page 
 function homePage(path, response) {
     fetchHtml(path, response)
     const homeMsg = `Route /home visited.`; 
@@ -39,19 +48,20 @@ function musictheoryinsideoutPage(path, response) {
 }
 
 function cssStaticPage(path, response) {
-    staticFile(path, response, 'text/css'); 
+    fetchStaticFile(path, response, 'text/css'); 
 }
 
 function imgStaticPage(path, response) {
-    staticFile(path, response, 'text/jpg'); 
+    fetchStaticFile(path, response, 'text/jpg'); 
 }
 
 function jsStaticPage(path, response) {
-    staticFile(path, response, 'text/js'); 
+    fetchStaticFile(path, response, 'text/js'); 
 }
 
 
 
+// Function referenced for each of the 6 HTML pages: 
 
 function fetchHtml(page, response) {
     fs.readFile(page, (error, content) => {
@@ -65,7 +75,10 @@ function fetchHtml(page, response) {
     });
 };
 
-function staticFile (path, response, ct)  {
+// Function refrenced for rendering CSS, JPG and JS content-type. 
+// The content-type is passed in as the parameter 'ct': 
+
+function fetchStaticFile (path, response, ct)  {
     fs.readFile(path, (error, content) => {
         if (error) {
             console.error(`Error reading file: ${error}`);

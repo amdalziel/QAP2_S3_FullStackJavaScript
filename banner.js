@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", function(){
+  
   // Piano Rotation Images:
   const pianoArray = [
       { page: 42, url: "images/theory1.jpg" },
